@@ -1,4 +1,14 @@
 import { Controller } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
+import { Transaction } from '../entities/transaction.entity';
+import { TransactionService } from '../services/transaction.service';
 
-@Controller('transaction')
-export class TransactionController {}
+@Crud({
+  model: {
+    type: Transaction,
+  },
+})
+@Controller('/api/transactions')
+export class TransactionController implements CrudController<Transaction> {
+  public constructor(public service: TransactionService) {}
+}
