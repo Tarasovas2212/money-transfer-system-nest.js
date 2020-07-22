@@ -15,7 +15,7 @@ export class Transaction {
   @Column({ default: 0 })
   amount: number;
 
-  @Column({ default: Date.now })
+  @Column({ type: 'timestamp without time zone', default: 'NOW()' })
   date: Date;
 
   @Column({ name: 'is_aborted', default: false })

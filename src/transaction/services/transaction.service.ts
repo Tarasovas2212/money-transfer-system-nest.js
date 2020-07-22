@@ -9,7 +9,7 @@ import { CrudRequest } from '@nestjsx/crud';
 export class TransactionService extends TypeOrmCrudService<Transaction> {
   public constructor(
     @InjectRepository(Transaction)
-    private transactionRepository: Repository<Transaction>,
+    public transactionRepository: Repository<Transaction>,
   ) {
     super(transactionRepository);
   }
