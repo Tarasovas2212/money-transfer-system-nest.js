@@ -21,11 +21,11 @@ export class Transaction {
   @Column({ name: 'is_aborted', default: false })
   isAborted: boolean;
 
-  @ManyToOne(() => Card)
+  @ManyToOne(() => Card, { nullable: false })
   @JoinColumn({ name: 'sender_card_id' })
   sender: Card;
 
-  @ManyToOne(() => Card)
+  @ManyToOne(() => Card, { nullable: false })
   @JoinColumn({ name: 'receiver_card_id' })
   receiver: Card;
 }
