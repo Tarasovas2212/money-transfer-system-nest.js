@@ -7,6 +7,9 @@ import { TransactionService } from '../services/transaction.service';
   model: {
     type: Transaction,
   },
+  routes: {
+    only: ['createOneBase', 'getManyBase', 'getOneBase'],
+  },
 })
 @Controller('/api/transactions')
 export class TransactionController implements CrudController<Transaction> {
