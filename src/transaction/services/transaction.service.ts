@@ -14,7 +14,7 @@ export class TransactionService extends TypeOrmCrudService<Transaction> {
     super(transactionRepository);
   }
 
-  public async create(
+  public async createOne(
     req: CrudRequest,
     body: Transaction,
   ): Promise<Transaction> {
