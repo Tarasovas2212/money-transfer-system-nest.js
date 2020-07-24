@@ -23,7 +23,6 @@ export class UserService {
   }
 
   create(user: User): Promise<User> {
-    delete user.id;
     return this.userRepository.save(user);
   }
 

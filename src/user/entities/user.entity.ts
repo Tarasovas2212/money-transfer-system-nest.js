@@ -7,9 +7,4 @@ export class User {
 
   @Column()
   name: string;
-
-  // @ManyToOne((type) => Company, (company) => company.employees)
-  // company: Company;
-  // @ManyToOne((type) => Hobby, (hobby) => hobby.employees)
-  // hobbies: Hobby[];
 }

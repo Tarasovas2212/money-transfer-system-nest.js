@@ -7,6 +7,13 @@ import { CardService } from '../services/card.service';
   model: {
     type: Card,
   },
+  query: {
+    join: {
+      user: {
+        eager: true,
+      },
+    },
+  },
 })
 @Controller('/api/cards')
 export class CardController implements CrudController<Card> {

@@ -5,7 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
-import { Card } from 'src/card/card.entity';
+import { Card } from 'src/card/entities/card.entity';
 
 @Entity({ name: 'transactions' })
 export class Transaction {
@@ -21,11 +21,15 @@ export class Transaction {
   @Column({ name: 'is_aborted', default: false })
   isAborted: boolean;
 
-  @ManyToOne(() => Card, { nullable: false })
+  @ManyToOne(() => Card, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'sender_card_id' })
   sender: Card;
 
-  @ManyToOne(() => Card, { nullable: false })
+  @ManyToOne(() => Card, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'receiver_card_id' })
   receiver: Card;
 }

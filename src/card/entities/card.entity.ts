@@ -5,7 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
-import { User } from '../../modules/user/entities/user.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity({ name: 'cards' })
 export class Card {
@@ -21,7 +21,7 @@ export class Card {
   @Column({ name: 'credit_limit', default: 0 })
   creditLimit: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { eager: true, nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: User;
 }

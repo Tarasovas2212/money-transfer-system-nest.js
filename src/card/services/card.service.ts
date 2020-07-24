@@ -18,6 +18,7 @@ export class CardService extends TypeOrmCrudService<Card> {
       card.debit += value - card.credit;
       card.credit = 0;
       this.cardRepository.save(card);
+      return;
     }
     card.credit -= value;
     this.cardRepository.save(card);
@@ -34,6 +35,7 @@ export class CardService extends TypeOrmCrudService<Card> {
       card.credit += value - card.debit;
       card.debit = 0;
       this.cardRepository.save(card);
+      return;
     }
     card.debit -= value;
     this.cardRepository.save(card);
