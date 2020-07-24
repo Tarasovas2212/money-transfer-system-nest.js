@@ -17,17 +17,14 @@ export class TransactionService extends TypeOrmCrudService<Transaction> {
     super(transactionRepository);
   }
 
-  public async createOne(
-    req: CrudRequest,
-    body: Transaction,
-  ): Promise<Transaction> {
+  public async create(body: Transaction): Promise<void> {
     await getConnection().transaction(async () => {
       await this.cardService.decrease(body.sender.toString(), body.amount);
       await this.cardService.increase(body.receiver.toString(), body.amount);
+
       const transaction = this.transactionRepository.create(body);
       await this.transactionRepository.save(transaction);
     });
-    return super.createOne(req, body);
   }
 
   // public async create(body: CreateTransactionDto): Promise<void> {

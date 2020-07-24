@@ -25,11 +25,11 @@ export class Transaction {
     nullable: false,
   })
   @JoinColumn({ name: 'sender_card_id' })
-  sender: Card;
+  sender: number;
 
   @ManyToOne(() => Card, {
     nullable: false,
   })
   @JoinColumn({ name: 'receiver_card_id' })
-  receiver: Card;
+  receiver: number;
 }

@@ -9,7 +9,7 @@ import { TransactionService } from '../services/transaction.service';
     type: Transaction,
   },
   routes: {
-    only: ['createOneBase', 'getManyBase', 'getOneBase'],
+    only: ['getManyBase', 'getOneBase'],
   },
   query: {
     join: {
@@ -26,8 +26,8 @@ import { TransactionService } from '../services/transaction.service';
 export class TransactionController implements CrudController<Transaction> {
   public constructor(public service: TransactionService) {}
 
-  // @Post()
-  // create(@Body() body: CreateTransactionDto): Promise<void> {
-  //   return this.transactionService.create(body);
-  // }
+  @Post()
+  create(@Body() body: Transaction): Promise<void> {
+    return this.service.create(body);
+  }
 }
