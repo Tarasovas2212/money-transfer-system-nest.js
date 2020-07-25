@@ -12,20 +12,19 @@ export class CardService extends TypeOrmCrudService<Card> {
     super(cardRepository);
   }
 
-  public async increase(id: number, amount: number): Promise<Card> {
+  public async increase(id: number, amount: number): Promise<void> {
     const card = await this.cardRepository.findOne(id);
     if (card.credit < amount) {
       card.debit += amount - card.credit;
       card.credit = 0;
       this.cardRepository.save(card);
-      return card;
+      return;
     }
     card.credit -= amount;
     this.cardRepository.save(card);
-    return card;
   }
 
-  public async decrease(id: number, amount: number): Promise<Card> {
+  public async decrease(id: number, amount: number): Promise<void> {
     const card = await this.cardRepository.findOne(id);
     const notEnoughMoney = amount > card.debit + card.creditLimit - card.credit;
     if (notEnoughMoney) {
@@ -36,17 +35,15 @@ export class CardService extends TypeOrmCrudService<Card> {
       card.credit += amount - card.debit;
       card.debit = 0;
       this.cardRepository.save(card);
-      return card;
+      return;
     }
     card.debit -= amount;
     this.cardRepository.save(card);
-    return card;
   }
 
-  public async setLimit(id: number, amount: number): Promise<Card> {
+  public async setLimit(id: number, amount: number): Promise<void> {
     const card = await this.cardRepository.findOne(id);
     card.creditLimit = amount;
     this.cardRepository.save(card);
-    return card;
   }
 }
