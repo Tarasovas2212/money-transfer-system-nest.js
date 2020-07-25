@@ -1,4 +1,4 @@
-import { Controller, Patch, Param, Body } from '@nestjs/common';
+import { Controller, Patch, Param, Body, ParseIntPipe } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Card } from '../entities/card.entity';
 import { CardService } from '../services/card.service';
@@ -9,7 +9,7 @@ import { CardService } from '../services/card.service';
   },
   query: {
     join: {
-      user: {
+      card: {
         eager: true,
       },
     },
@@ -21,25 +21,25 @@ export class CardController implements CrudController<Card> {
 
   @Patch('/increase/:id')
   public async increase(
-    @Param('id') id: string,
-    @Body('value') value: number,
+    @Param('id', ParseIntPipe) id: number,
+    @Body('amount', ParseIntPipe) amount: number,
   ): Promise<void> {
-    await this.service.increase(id, value);
+    await this.service.increase(id, amount);
   }
 
   @Patch('/decrease/:id')
   public async decrease(
-    @Param('id') id: string,
-    @Body('value') value: number,
+    @Param('id', ParseIntPipe) id: number,
+    @Body('amount', ParseIntPipe) amount: number,
   ): Promise<void> {
-    await this.service.decrease(id, value);
+    await this.service.decrease(id, amount);
   }
 
   @Patch('/setLimit/:id')
   public async setLimit(
-    @Param('id') id: string,
-    @Body('value') value: number,
+    @Param('id', ParseIntPipe) id: number,
+    @Body('amount', ParseIntPipe) amount: number,
   ): Promise<void> {
-    await this.service.setLimit(id, value);
+    await this.service.setLimit(id, amount);
   }
 }
