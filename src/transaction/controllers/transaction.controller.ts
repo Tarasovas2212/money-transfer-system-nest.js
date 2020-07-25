@@ -2,7 +2,6 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Transaction } from '../entities/transaction.entity';
 import { TransactionService } from '../services/transaction.service';
-// import { CreateTransactionDto } from '../interfaces/transaction.interface';
 
 @Crud({
   model: {
