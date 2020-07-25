@@ -17,8 +17,8 @@ export class TransactionService extends TypeOrmCrudService<Transaction> {
 
   public async create(body: Transaction): Promise<void> {
     await getConnection().transaction(async () => {
-      await this.cardService.decrease(body.sender.toString(), body.amount);
-      await this.cardService.increase(body.receiver.toString(), body.amount);
+      await this.cardService.decrease(body.sender, body.amount);
+      await this.cardService.increase(body.receiver, body.amount);
 
       const transaction = this.transactionRepository.create(body);
       await this.transactionRepository.save(transaction);
