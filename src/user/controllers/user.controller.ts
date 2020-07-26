@@ -12,7 +12,9 @@ import {
 import { User } from '../entities/user.entity';
 import { UserService } from '../services/user.service';
 import { CreateUserDto, UpdateUserDto } from './dto';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('users')
 @Controller('/api/users')
 export class userController {
   constructor(private readonly userService: UserService) {}
@@ -27,6 +29,7 @@ export class userController {
     return this.userService.findOne(id);
   }
 
+  @ApiBody({type: CreateUserDto})
   @Post()
   createAction(@Body() createDto: CreateUserDto): Promise<User> {
     const user = new User();
@@ -34,6 +37,7 @@ export class userController {
     return this.userService.create(user);
   }
 
+  @ApiBody({type: UpdateUserDto})
   @Put(':id')
   async updateAction(
     @Param('id') id: string,

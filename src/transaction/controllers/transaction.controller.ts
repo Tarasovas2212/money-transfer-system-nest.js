@@ -2,6 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Transaction } from '../entities/transaction.entity';
 import { TransactionService } from '../services/transaction.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Crud({
   model: {
@@ -21,6 +22,7 @@ import { TransactionService } from '../services/transaction.service';
     },
   },
 })
+@ApiTags('transactions')
 @Controller('/api/transactions')
 export class TransactionController implements CrudController<Transaction> {
   public constructor(public service: TransactionService) {}

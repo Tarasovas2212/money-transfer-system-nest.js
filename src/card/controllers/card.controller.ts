@@ -2,6 +2,7 @@ import { Controller, Patch, Param, Body, ParseIntPipe } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Card } from '../entities/card.entity';
 import { CardService } from '../services/card.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Crud({
   model: {
@@ -18,6 +19,7 @@ import { CardService } from '../services/card.service';
     },
   },
 })
+@ApiTags('cards')
 @Controller('/api/cards')
 export class CardController implements CrudController<Card> {
   public constructor(public service: CardService) {}
