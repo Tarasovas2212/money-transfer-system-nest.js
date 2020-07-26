@@ -10,7 +10,6 @@ import { CardService } from '../services/card.service';
   routes: {
     only: ['getManyBase', 'getOneBase', 'createOneBase', 'deleteOneBase'],
   },
-  validation: {},
   query: {
     join: {
       card: {
