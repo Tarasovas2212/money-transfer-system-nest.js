@@ -29,7 +29,7 @@ export class userController {
     return this.userService.findOne(id);
   }
 
-  @ApiBody({type: CreateUserDto})
+  @ApiBody({ type: CreateUserDto })
   @Post()
   createAction(@Body() createDto: CreateUserDto): Promise<User> {
     const user = new User();
@@ -37,7 +37,7 @@ export class userController {
     return this.userService.create(user);
   }
 
-  @ApiBody({type: UpdateUserDto})
+  @ApiBody({ type: UpdateUserDto })
   @Put(':id')
   async updateAction(
     @Param('id') id: string,

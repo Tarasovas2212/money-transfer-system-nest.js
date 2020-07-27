@@ -12,16 +12,13 @@ export class UserService {
   ) {}
 
   findAll(query: any): Promise<User[]> {
-    const { take, name, order, sort, page, size, } = query;
+    const { take, order, sort, page, size } = query;
     let sortOrder = { [sort]: order };
     if (sort === undefined || order === undefined) {
       sortOrder = {};
     }
     const skip = (page - 1) * size;
     return this.userRepository.find({
-      where: {
-        name: name,
-      },
       take: take,
       order: sortOrder,
       skip: skip,
