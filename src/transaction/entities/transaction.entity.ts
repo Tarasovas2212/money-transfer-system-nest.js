@@ -10,6 +10,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ name: 'transactions' })
 export class Transaction {
+  @ApiProperty({required: false})
   @PrimaryGeneratedColumn()
   id: number;
 

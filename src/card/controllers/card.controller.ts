@@ -2,7 +2,8 @@ import { Controller, Patch, Param, Body, ParseIntPipe } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Card } from '../entities/card.entity';
 import { CardService } from '../services/card.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBody } from '@nestjs/swagger';
+import { CreateCardDto } from '../dto/create.card.dto';
 
 @Crud({
   model: {
@@ -18,6 +19,9 @@ import { ApiTags } from '@nestjs/swagger';
       },
     },
   },
+  dto: {
+    create: CreateCardDto,
+  }
 })
 @ApiTags('cards')
 @Controller('/api/cards')
@@ -25,6 +29,10 @@ export class CardController implements CrudController<Card> {
   public constructor(public service: CardService) {}
 
   @Patch('/increase/:id')
+  @ApiBody({
+    description: 'amount',
+    type: Number,
+  })
   public async increase(
     @Param('id', ParseIntPipe) id: number,
     @Body('amount', ParseIntPipe) amount: number,
@@ -33,6 +41,10 @@ export class CardController implements CrudController<Card> {
   }
 
   @Patch('/decrease/:id')
+  @ApiBody({
+    description: 'amount',
+    type: Number,
+  })
   public async decrease(
     @Param('id', ParseIntPipe) id: number,
     @Body('amount', ParseIntPipe) amount: number,
@@ -41,6 +53,10 @@ export class CardController implements CrudController<Card> {
   }
 
   @Patch('/setLimit/:id')
+  @ApiBody({
+    description: 'amount',
+    type: Number,
+  })
   public async setLimit(
     @Param('id', ParseIntPipe) id: number,
     @Body('amount', ParseIntPipe) amount: number,

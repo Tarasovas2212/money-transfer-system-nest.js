@@ -3,6 +3,7 @@ import { Crud, CrudController } from '@nestjsx/crud';
 import { Transaction } from '../entities/transaction.entity';
 import { TransactionService } from '../services/transaction.service';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateTransactionDto } from '../dto/create.transaction.dto';
 
 @Crud({
   model: {
@@ -28,7 +29,7 @@ export class TransactionController implements CrudController<Transaction> {
   public constructor(public service: TransactionService) {}
 
   @Post()
-  create(@Body() body: Transaction): Promise<void> {
+  create(@Body() body: CreateTransactionDto): Promise<void> {
     return this.service.create(body);
   }
 }
