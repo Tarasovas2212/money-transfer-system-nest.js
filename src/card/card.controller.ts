@@ -1,9 +1,9 @@
 import { Controller, Patch, Param, Body, ParseIntPipe } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
-import { Card } from '../entities/card.entity';
-import { CardService } from '../services/card.service';
+import { Card } from './card.entity';
+import { CardService } from './card.service';
 import { ApiTags, ApiBody } from '@nestjs/swagger';
-import { CreateCardDto } from '../dto/create.card.dto';
+import { CreateCardDto } from './dto/create.card.dto';
 
 @Crud({
   model: {

@@ -6,7 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Min, IsInt, IsOptional, IsEmpty } from 'class-validator';
-import { User } from '../../user/entities/user.entity';
+import { User } from '../user/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ name: 'cards' })

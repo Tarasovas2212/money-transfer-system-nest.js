@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
-import { Card } from '../entities/card.entity';
+import { Card } from './card.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()

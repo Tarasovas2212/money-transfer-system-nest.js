@@ -9,11 +9,11 @@ import {
   NotFoundException,
   Query,
 } from '@nestjs/common';
-import { User } from '../entities/user.entity';
-import { UserService } from '../services/user.service';
-import { CreateUserDto, UpdateUserDto, QueryUserDTO } from '../dto/user.dto';
+import { User } from './user.entity';
+import { UserService } from './user.service';
+import { UserDto } from './dto/user.dto';
+import { QueryUserDTO } from './dto/query.user.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
-import { type } from 'os';
 
 @ApiTags('users')
 @Controller('/api/users')
@@ -30,19 +30,19 @@ export class userController {
     return this.userService.findOne(id);
   }
 
-  @ApiBody({ type: CreateUserDto })
+  @ApiBody({ type: UserDto })
   @Post()
-  createAction(@Body() createDto: CreateUserDto): Promise<User> {
+  createAction(@Body() createDto: UserDto): Promise<User> {
     const user = new User();
     user.name = createDto.name;
     return this.userService.create(user);
   }
 
-  @ApiBody({ type: UpdateUserDto })
+  @ApiBody({ type: UserDto })
   @Put(':id')
   async updateAction(
     @Param('id') id: string,
-    @Body() updateDto: UpdateUserDto,
+    @Body() updateDto: UserDto,
   ): Promise<User> {
     const user = await this.userService.findOne(id);
     if (user === undefined) {

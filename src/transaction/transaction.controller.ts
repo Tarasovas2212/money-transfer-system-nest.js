@@ -1,9 +1,9 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
-import { Transaction } from '../entities/transaction.entity';
-import { TransactionService } from '../services/transaction.service';
+import { Transaction } from './transaction.entity';
+import { TransactionService } from './transaction.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateTransactionDto } from '../dto/create.transaction.dto';
+import { CreateTransactionDto } from './create.transaction.dto';
 
 @Crud({
   model: {

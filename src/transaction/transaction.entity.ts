@@ -5,7 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
-import { Card } from 'src/card/entities/card.entity';
+import { Card } from 'src/card/card.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmpty } from 'class-validator';
 
