@@ -11,8 +11,9 @@ import {
 } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { UserService } from '../services/user.service';
-import { CreateUserDto, UpdateUserDto } from './dto';
+import { CreateUserDto, UpdateUserDto, QueryUserDTO } from '../dto/user.dto';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { type } from 'os';
 
 @ApiTags('users')
 @Controller('/api/users')
@@ -20,7 +21,7 @@ export class userController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  getAllAction(@Query() query: any): Promise<User[]> {
+  getAllAction(@Query() query: QueryUserDTO): Promise<User[]> {
     return this.userService.findAll(query);
   }
 
@@ -29,7 +30,7 @@ export class userController {
     return this.userService.findOne(id);
   }
 
-  @ApiBody({type: CreateUserDto})
+  @ApiBody({ type: CreateUserDto })
   @Post()
   createAction(@Body() createDto: CreateUserDto): Promise<User> {
     const user = new User();
@@ -37,7 +38,7 @@ export class userController {
     return this.userService.create(user);
   }
 
-  @ApiBody({type: UpdateUserDto})
+  @ApiBody({ type: UpdateUserDto })
   @Put(':id')
   async updateAction(
     @Param('id') id: string,

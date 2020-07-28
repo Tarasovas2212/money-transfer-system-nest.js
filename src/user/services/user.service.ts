@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import _ from 'lodash';
+import { QueryUserDTO } from '../dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -11,20 +11,22 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  findAll(query: any): Promise<User[]> {
-    const { take, name, order, sort, page, size, } = query;
-    let sortOrder = { [sort]: order };
-    if (sort === undefined || order === undefined) {
-      sortOrder = {};
+  findAll(query: QueryUserDTO): Promise<User[]> {
+    const { take, order, sort, page, size, name } = query;
+    let sortOrder = {};
+    let filter = {};
+    if (sort) {
+      sortOrder = { [sort]: order };
+    }
+    if (name) {
+      filter = { name: name };
     }
     const skip = (page - 1) * size;
     return this.userRepository.find({
-      where: {
-        name: name,
-      },
-      take: take,
+      where: filter,
+      take,
       order: sortOrder,
-      skip: skip,
+      skip,
     });
   }
 
