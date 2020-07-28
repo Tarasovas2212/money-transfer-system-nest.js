@@ -11,6 +11,7 @@ import { IsEmpty } from 'class-validator';
 
 @Entity({ name: 'transactions' })
 export class Transaction {
+  @ApiProperty({required: false})
   @PrimaryGeneratedColumn()
   id: number;
 
