@@ -46,7 +46,7 @@ export class userController {
   ): Promise<User> {
     const user = await this.userService.findOne(id);
     if (user === undefined) {
-      throw new NotFoundException(`User with such ${id} does not exist`);
+      throw new NotFoundException(`User with id(${id}) does not exist`);
     }
     user.name = updateDto.name;
     return this.userService.update(user);
