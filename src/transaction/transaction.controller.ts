@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Delete, Param } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Transaction } from './transaction.entity';
 import { TransactionService } from './transaction.service';
@@ -31,5 +31,10 @@ export class TransactionController implements CrudController<Transaction> {
   @Post()
   create(@Body() body: CreateTransactionDto): Promise<void> {
     return this.service.create(body);
+  }
+
+  @Delete('/rollback/:id')
+  async delete(@Param('id') id: number): Promise<void> {
+    await this.service.rollback(id);
   }
 }
